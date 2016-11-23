@@ -1,0 +1,11 @@
+@mixin mq($alias) {
+  $query: map-get($grid-breakpoints, $alias);
+
+  @if $query {
+    @media #{$query} {
+      @content;
+    }
+  } @else {
+    @error 'No breakpoint found for #{$alias}';
+  }
+}

@@ -1,0 +1,12 @@
+// Grid breakpoints
+$grid-breakpoints: (
+  'thumb':           'screen and (max-width: 499px)',
+  'handheld':        'screen and (min-width: 500px) and (max-width: 800px)',
+  'handheld-and-up': 'screen and (min-width: 500px)',
+  'pocket':          'screen and (max-width: 800px)',
+  'lap':             'screen and (min-width: 801px) and (max-width: 1024px)',
+  'lap-and-up':      'screen and (min-width: 801px)',
+  'portable':        'screen and (max-width: 1024px)',
+  'desk':            'screen and (min-width: 1025px)',
+  'widescreen':      'screen and (min-width: 1160px)'
+);
