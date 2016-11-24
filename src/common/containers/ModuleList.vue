@@ -1,5 +1,5 @@
 <template>
-  <div class="c-modules">
+  <div class="c-modules" v-on:keyup.esc="closeModal">
     <div class="c-module-item" v-for="module in modules" @click="openModal($event, module)">
       <span class="c-module-item__title">{{ module.title }}</span>
     </div>
@@ -47,7 +47,7 @@
           close: this.closeModal
         }
       },
-      closeModal: function (el) {
+      closeModal: function () {
         this.modal = null
       }
     }

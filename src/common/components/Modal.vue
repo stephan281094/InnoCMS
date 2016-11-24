@@ -2,12 +2,11 @@
   <div class="c-modal-wrapper">
     <transition name="opacity">
       <div class="c-modal-background" v-if="modal"
-        @click.self="modal.close(modal.el)" v-on:keyup.esc="modal.close(modal.el)"></div>
+        @click.self="modal.close()"></div>
     </transition>
     <transition v-on:enter="enter" v-on:leave="leave" v-bind:css="false">
-      <div class="c-modal c-module-item" v-if="modal"
-        v-on:keyup.esc="modal.close(modal.el)">
-        <button class="c-modal__close" @click.self="modal.close(modal.el)"></button>
+      <div class="c-modal c-module-item" v-if="modal">
+        <button class="c-modal__close" @click.self="modal.close()"></button>
         <span class="c-module-item__title">{{ modal.title }}</span>
         <div class="c-modal__content">
           <h1>bla bla bla bla bla</h1>
@@ -32,7 +31,22 @@
         required: false
       }
     },
+    created: function () {
+      if (typeof window !== 'undefined') {
+        window.addEventListener('keyup', this.handleKeyPress)
+      }
+    },
+    beforeDestroy: function () {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('keyup', this.handleKeyPress)
+      }
+    },
     methods: {
+      handleKeyPress: function (event) {
+        if (event.keyCode === 27) {
+          this.modal.close()
+        }
+      },
       enter: function (el, done) {
         const { modal } = this
 
