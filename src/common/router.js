@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import { createList } from './factory'
+
 // Containers
 import Home from './containers/Home.vue'
-import ModuleList from './containers/ModuleList.vue'
-import UserList from './containers/UserList.vue'
 import NotFound from './containers/NotFound.vue'
 import Settings from './containers/Settings.vue'
 
@@ -14,8 +14,12 @@ export default new Router({
   mode: 'history',
   linkActiveClass: 'active',
   routes: [
-    { path: '/', component: Home },
-    { path: '/settings', component: Settings,
+    {
+      path: '/', component: Home
+    },
+    {
+      path: '/settings',
+      component: Settings,
       children: [
         {
           path: '/',
@@ -24,18 +28,18 @@ export default new Router({
           }
         },
         {
+          path: 'modules',
+          component: createList('module'),
           meta: {
             transition: 'slide-right'
-          },
-          path: 'modules',
-          component: ModuleList
+          }
         },
         {
+          path: 'users',
+          component: createList('user'),
           meta: {
             transition: 'slide-left'
-          },
-          path: 'users',
-          component: UserList
+          }
         }
       ]
     },

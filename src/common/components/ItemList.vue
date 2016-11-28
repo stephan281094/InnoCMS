@@ -1,67 +1,66 @@
 <template>
-  <div class="c-modules" v-on:keyup.esc="closeModal">
-    <div class="c-module-item" v-for="module in modules" @click="openModal($event, module)">
-      <span class="c-module-item__title">{{ module.title }}</span>
+  <div class="c-list">
+    <div class="c-list__item" v-for="item in items" @click="openModal($event, item)">
+      <div class="c-list__item__name">
+        {{ item.name }}
+      </div>
     </div>
 
-    <pagination />
     <modal :modal="modal" />
   </div>
 </template>
 
 <script>
-  import Pagination from '../components/Pagination.vue'
   import Modal from '../components/Modal.vue'
 
   export default {
-    name: 'module-list',
+    props: {
+      type: {
+        type: String,
+        required: true
+      }
+    },
     components: {
-      pagination: Pagination,
       modal: Modal
     },
     data () {
+      const isInitialRender = !this.$root._isMounted
+
       return {
-        // Retrieve from API/ Graphql endpoint
-        modules: [
-          { title: 'Ervaren Symfony 2 developer' },
-          { title: 'Ervaren VueJS developer' },
-          { title: 'Frontend guru gezocht' },
-          { title: 'Social media manager worden?' },
-          { title: 'Ervaren Symfony 2 developer' },
-          { title: 'Ervaren VueJS developer' },
-          { title: 'Frontend guru gezocht' },
-          { title: 'Social media manager worden?' },
-          { title: 'Ervaren Symfony 2 developer' },
-          { title: 'Ervaren VueJS developer' }
-        ],
-        modal: null
+        modal: null,
+        items: isInitialRender ? this.$store.getters.getActiveItems : []
       }
     },
     methods: {
-      openModal: function (event, module) {
-        const el = event.currentTarget
-
+      openModal: function (event, item) {
         this.modal = {
-          el,
-          title: module.title,
+          el: event.currentTarget,
+          name: item.name,
           close: this.closeModal
         }
       },
       closeModal: function () {
         this.modal = null
       }
+    },
+    beforeMount () {
+      this.$store.commit('SET_ACTIVE_TYPE', { type: this.type })
+      this.items = this.$store.getters.getActiveItems
     }
   }
 </script>
 
 <style lang="sass">
-  .c-modules {
+  .c-list {
+    position: absolute;
+    width: 100%;
     padding: .5rem;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
   }
 
-  .c-module-item {
+  .c-list__item {
     padding: 1rem;
     background-color: #fff;
     margin-bottom: 1px;
@@ -75,12 +74,7 @@
     box-shadow: none;
     flex-wrap: nowrap;
 
-    &:hover,
-    &:focus {
-      // color: #c00;
-    }
-
-    &__title {
+    &__name {
       display: inline-block;
       color: inherit;
       font-weight: 400;

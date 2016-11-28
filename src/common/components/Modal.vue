@@ -5,9 +5,9 @@
         @click.self="modal.close()"></div>
     </transition>
     <transition v-on:enter="enter" v-on:leave="leave" v-bind:css="false">
-      <div class="c-modal c-module-item" v-if="modal">
+      <div class="c-modal c-list__item" v-if="modal">
         <button class="c-modal__close" @click.self="modal.close()"></button>
-        <span class="c-module-item__title">{{ modal.title }}</span>
+        <span class="c-list__item__name">{{ modal.name }}</span>
         <div class="c-modal__content">
           <h1>bla bla bla bla bla</h1>
           <p>Lorem ipsum dolor sit amet, consectetur

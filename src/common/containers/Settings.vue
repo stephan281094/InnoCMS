@@ -1,21 +1,19 @@
 <template>
-  <div style="flex: 1; display: flex; flex-direction: column;">
+  <div>
     <div class="c-head">
       <h1 class="c-head__title">Settings</h1>
       <p class="c-head__description">Configure modules, users and other administrative settings.</p>
     </div>
-    <div class="c-list">
-      <div class="c-nav">
-        <router-link class="c-nav__link" to="/settings/modules"
-          active-class="c-nav__link--active">Modules</router-link>
-        <router-link class="c-nav__link" to="/settings/users"
-          active-class="c-nav__link--active">Users</router-link>
-      </div>
-      <div class="o-content">
-        <transition :name="transition">
-          <router-view></router-view>
-        </transition>
-      </div>
+    <div class="c-nav">
+      <router-link class="c-nav__link" to="/settings/modules"
+        active-class="c-nav__link--active">Modules</router-link>
+      <router-link class="c-nav__link" to="/settings/users"
+        active-class="c-nav__link--active">Users</router-link>
+    </div>
+    <div class="o-content">
+      <transition :name="transition">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -29,7 +27,7 @@
       }
     },
     watch: {
-      '$route': function (to, from) {
+      $route: function (to, from) {
         this.transition = this.$route.meta.transition
       }
     }
@@ -39,12 +37,6 @@
 <style lang="sass">
   .o-content {
     flex: 1;
-  }
-
-  .c-modules {
-    position: absolute;
-    width: 100%;
-    overflow-x: hidden;
   }
 
   .slide-left-enter-active,
