@@ -8,13 +8,13 @@ const store = new Vuex.Store({
     activeType: null,
     lists: {
       module: [
-        { name: 'Articles' },
-        { name: 'Settings' }
+        { id: 1, name: 'Articles' },
+        { id: 2, name: 'Settings' }
       ],
       user: [
-        { name: 'Roy Bes' },
-        { name: 'Stephan de Vries' },
-        { name: 'Steffanys Gómez' }
+        { id: 1, name: 'Roy Bes' },
+        { id: 2, name: 'Steffanys Gómez' },
+        { id: 3, name: 'Stephan de Vries' }
       ]
     }
   },

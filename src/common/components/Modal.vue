@@ -9,12 +9,7 @@
         <button class="c-modal__close" @click.self="modal.close()"></button>
         <span class="c-list__item__name">{{ modal.name }}</span>
         <div class="c-modal__content">
-          <h1>bla bla bla bla bla</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur
-          adipisicing elit. Similique ratione laudantium pariatur, hic
-          consequatur, recusandae quidem veritatis delectus amet voluptatum
-          quae. Dolorum non corporis animi quia consequatur ratione, dignissimos
-          totam.</p>
+          <slot />
         </div>
       </div>
     </transition>

@@ -1,12 +1,14 @@
 <template>
   <div class="c-list">
-    <div class="c-list__item" v-for="item in items" @click="openModal($event, item)">
-      <div class="c-list__item__name">
-        {{ item.name }}
-      </div>
+    <div v-for="item in items" @click="openModal($event, item)">
+      <router-link :to="`/settings/${type}s/${item.id}`" class="c-list__item">
+        <div class="c-list__item__name">{{ item.name }}</div>
+      </router-link>
     </div>
 
-    <modal :modal="modal" />
+    <modal :modal="modal">
+      <router-view></router-view>
+    </modal>
   </div>
 </template>
 
@@ -41,6 +43,7 @@
       },
       closeModal: function () {
         this.modal = null
+        this.$router.push(`/settings/${this.type}s`)
       }
     },
     beforeMount () {

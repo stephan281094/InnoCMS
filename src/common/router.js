@@ -5,6 +5,7 @@ import { createList } from './factory'
 
 // Containers
 import Home from './containers/Home.vue'
+import Item from './components/Item.vue'
 import NotFound from './containers/NotFound.vue'
 import Settings from './containers/Settings.vue'
 
@@ -32,14 +33,26 @@ export default new Router({
           component: createList('module'),
           meta: {
             transition: 'slide-right'
-          }
+          },
+          children: [
+            {
+              path: ':id',
+              component: Item
+            }
+          ]
         },
         {
           path: 'users',
           component: createList('user'),
           meta: {
             transition: 'slide-left'
-          }
+          },
+          children: [
+            {
+              path: ':id',
+              component: Item
+            }
+          ]
         }
       ]
     },
