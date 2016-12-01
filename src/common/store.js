@@ -28,6 +28,14 @@ const store = new Vuex.Store({
       const { activeType, lists } = state
 
       return lists[activeType]
+    },
+    getItemById (state, getters) {
+      const activeItems = getters.getActiveItems
+      const matchedItems = activeItems.filter((item) => {
+        return item.id === parseInt(state.route.params.id)
+      })
+
+      return matchedItems.length > 0 ? matchedItems[0] : false
     }
   }
 })
