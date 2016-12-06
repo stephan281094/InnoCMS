@@ -6,7 +6,7 @@
       </router-link>
     </div>
 
-    <modal :modal="modal">
+    <modal :modal="this.$store.state.modal">
       <router-view></router-view>
     </modal>
   </div>
@@ -35,14 +35,14 @@
     },
     methods: {
       openModal: function (event, item) {
-        this.modal = {
+        this.$store.commit('SET_MODAL', {
           el: event.currentTarget,
           name: item.name,
           close: this.closeModal
-        }
+        })
       },
       closeModal: function () {
-        this.modal = null
+        this.$store.commit('SET_MODAL', null)
         this.$router.push(`/settings/${this.type}s`)
       }
     },

@@ -6,6 +6,7 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     activeType: null,
+    modal: null,
     lists: {
       module: [
         { id: 1, name: 'Articles' },
@@ -21,6 +22,9 @@ const store = new Vuex.Store({
   mutations: {
     SET_ACTIVE_TYPE (state, { type }) {
       state.activeType = type
+    },
+    SET_MODAL (state, modal) {
+      state.modal = modal
     }
   },
   getters: {
